@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xml>
+<queries>
+<query> select * from potluck </query>
+</queries>
+</xml>

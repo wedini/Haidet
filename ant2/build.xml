@@ -1,0 +1,32 @@
+
+<project name="ems-java" basedir="." default="war">
+
+    <property name="src.dir"      value="src"/>
+    <property name="build.dir"    value="build"/>
+    <property name="classes.dir"  value="${build.dir}/classes"/>
+    <property name="lib.dir"      value="oldlib"/>
+    <property name="war.dir"	  value="${build.dir}/war"/>
+    <property name="main-class"   value="ems-java"/>
+    
+    <target name="clean">
+        <delete dir="${build.dir}"/>
+    </target>
+    
+    <path id="classpath">
+        <fileset dir="${lib.dir}" includes="**/*.jar"/>
+    </path>
+
+    <target name="compile" depends="clean">
+        <mkdir dir="${classes.dir}"/>
+        <javac encoding="ISO-8859-1" srcdir="${src.dir}" destdir="${classes.dir}" classpathref="classpath"/>
+    </target>
+    
+    <target name="war" depends="compile">
+        <mkdir dir="${war.dir}"/>
+	<war destfile="build/war/ems-java.war" webxml="WebRoot/WEB-INF/web.xml">
+	   <fileset dir="${lib.dir}" includes="**/*.jar"/>
+	   <fileset dir = "WebRoot/" includes="**/*.*"/>    
+	</war>
+    </target>
+	
+ </project>

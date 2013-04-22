@@ -1,0 +1,16 @@
+
+#!/bin/bash
+for file in *.jar
+do
+  echo
+  echo
+  echo "NAME"
+  echo $file
+  echo
+  jar tvf $file
+  echo
+  echo $file
+  echo "NAME"
+  echo
+  echo
+done

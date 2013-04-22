@@ -1,0 +1,4 @@
+Haidet=1
+Lila=200000000
+Nixon=3
+Darly=4

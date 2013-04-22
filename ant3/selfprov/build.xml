@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="selfprov" basedir="." >
+
+      <property name="util.dir"      value="SelfProvUtil"/>
+      <property name="ejb.dir"       value="SelfProvisionEJB"/>
+      <property name="backEnd.dir"   value="SelfProvBackEnd"/>
+      <property name="frontEnd.dir"  value="SelfProvFrontEnd"/>
+
+      <ant antfile="util.xml"        dir="${util.dir}"/>
+      <ant antfile="ejb.xml"         dir="${ejb.dir}"/>
+      <ant antfile="selfprovbe.xml"  dir="${backEnd.dir}"/> 
+      <ant antfile="selfprovfe.xml"  dir="${frontEnd.dir}"/>
+      	
+ </project>

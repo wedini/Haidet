@@ -1,0 +1,22 @@
+MySQL
+
+https://www.digitalocean.com/community/articles/a-basic-mysql-tutorial
+sudo apt-get install mysql-server
+mysql -u root -p
+ CREATE DATABASE database name;
+ DROP DATABASE database name;
+ DESCRIBE potluck;
+ ALTER TABLE potluck ADD email VARCHAR(40) AFTER name; 
+ ALTER TABLE potluck ADD email VARCHAR(40);
+UPDATE `potluck` 
+SET 
+`confirmed` = 'Y' 
+WHERE `potluck`.`name` ='Sandy';
+
+
+
+
+TO CREATE A USER AND CHANGE PERMISSIONS
+1.Must log in as root user = mysql -u root -p
+2.Create a user called 'dbuser' = CREATE USER 'dbuser'@'localhost' IDENTIFIED BY 'abc123';
+3.Give it  privileges to haidet_1stDB = GRANT ALL PRIVILEGES ON haidet_1stDB.* TO 'dbuser'@'localhost';

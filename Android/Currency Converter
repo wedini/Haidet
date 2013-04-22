@@ -1,0 +1,262 @@
+Currency Converter...
+
+MainActivity.java
+------------------
+
+package com.example.currencyconverter;
+
+import android.os.Bundle;
+import android.R.integer;
+import android.app.Activity;
+import android.util.Log;
+import android.view.Menu;
+import android.view.View;
+import android.widget.Adapter;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
+
+public class MainActivity extends Activity {
+
+	int toPos, fromPos;
+	double x = 0.0;
+	Double[] Currency = { 1.0, 0.69881, 0.61095, 0.93188, 0.96680, 44.72,
+			73.14, 80.55 };
+	Spinner Fromspinner1;
+	Spinner Tospinner2;
+	TextView From;
+	TextView Amount;
+	TextView temp;
+	TextView To;
+	TextView Result;
+	EditText AmounteditText1;
+	EditText ResulteditText2;
+
+	Button Clear, Swap, Convert;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+
+		AmounteditText1 = (EditText) findViewById(R.id.AmounteditText1);
+		ResulteditText2 = (EditText) findViewById(R.id.ResulteditText2);
+
+		From = (TextView) findViewById(R.id.FromtextView1);
+		temp = (TextView) findViewById(R.id.FromtextView1);
+		Amount = (TextView) findViewById(R.id.AmounttextView2);
+		To = (TextView) findViewById(R.id.TotextView3);
+		Result = (TextView) findViewById(R.id.ResulttextView4);
+
+		Fromspinner1 = (Spinner) findViewById(R.id.Fromspinner1);
+		final ArrayAdapter<CharSequence> adapter = ArrayAdapter
+				.createFromResource(this, R.array.CountryArray,
+						android.R.layout.simple_spinner_item);
+		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		Fromspinner1.setAdapter(adapter);
+		Fromspinner1.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+			@Override
+			public void onItemSelected(AdapterView<?> arg0, View arg1,
+					int arg2, long arg3) {
+				// TODO Auto-generated method stub
+				fromPos = arg2;
+
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> arg0) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+
+		Tospinner2 = (Spinner) findViewById(R.id.Tospinner2);
+		Tospinner2.setAdapter(adapter);
+		Tospinner2.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+			@Override
+			public void onItemSelected(AdapterView<?> arg0, View arg1,
+					int arg2, long arg3) {
+				// TODO Auto-generated method stub
+				toPos = arg2;
+
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> arg0) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+
+		Clear = (Button) findViewById(R.id.button1);
+		Clear.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				Toast.makeText(getApplicationContext(), "Clear",
+						Toast.LENGTH_LONG).show();
+				Tospinner2.setSelection(0);
+				Fromspinner1.setSelection(0);
+				AmounteditText1.setText("");
+				ResulteditText2.setText("");
+
+			}
+		});
+
+		Swap = (Button) findViewById(R.id.button2);
+		Swap.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				Toast.makeText(getApplicationContext(), "Swap",
+						Toast.LENGTH_LONG).show();
+				Log.d("Swap: toPos", "" + toPos);
+				Log.d("Swap: fromPos", "" + fromPos);
+
+				Fromspinner1.setSelection(toPos);
+				Tospinner2.setSelection(fromPos);
+
+			}
+		});
+
+		Convert = (Button) findViewById(R.id.button3);
+		Convert.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				Toast.makeText(getApplicationContext(), "Convert",
+						Toast.LENGTH_LONG).show();
+
+				Double amt = Double.parseDouble(AmounteditText1.getText()
+						.toString());
+				Double amtUSD = amt / Currency[fromPos]; // converting amt to
+															// USD
+				Double res = amtUSD * Currency[toPos]; // converting this amtUSD
+														// to the one selected
+														// in TOArray.
+
+				ResulteditText2.setText(res.toString());
+			}
+
+		});
+
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.activity_main, menu);
+		return true;
+	}
+
+}
+
+**************************************************
+************************************************************
+
+Activity.xml
+------------
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity" >
+
+    <TextView
+        android:id="@+id/FromtextView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="From"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Spinner
+        android:id="@+id/Fromspinner1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/AmounttextView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Amount"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <EditText
+        android:id="@+id/AmounteditText1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10" >
+
+        <requestFocus />
+    </EditText>
+
+    <TextView
+        android:id="@+id/TotextView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="To"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Spinner
+        android:id="@+id/Tospinner2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Clear" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="18dp"
+            android:text="Swap" />
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Convert" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/ResulttextView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="Result"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <EditText
+        android:id="@+id/ResulteditText2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10" />
+
+</LinearLayout>
+
+*****************************************************
+*******************************************************
+

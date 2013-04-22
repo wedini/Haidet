@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="SelfProvBackEnd" basedir="." default="war">
+
+      <property name="src.dir"      value="src"/>
+      <property name="build.dir"    value="build"/>
+      <property name="classes.dir"  value="${build.dir}/classes"/>
+      <property name="lib.dir"      value="../lib"/>
+      <property name="war.dir"	    value="${build.dir}/war"/>
+      
+      <target name="clean">
+          <delete dir="${build.dir}"/>
+      </target>
+     
+      <path id="classpath">
+           <fileset dir="${lib.dir}"                     includes="**/*.jar"/>
+	   <fileset dir="../SelfProvUtil/build/jar/"     includes="*.jar"/>
+           <fileset dir="../SelfProvisionEJB/build/jar/" includes="*.jar"/>
+      </path>
+
+      <target name="compile" depends="clean">
+          <mkdir dir="${classes.dir}"/>
+          <javac encoding="ISO-8859-1" srcdir="${src.dir}" destdir="${classes.dir}" classpathref="classpath" source="1.4" target="1.4"/>
+      </target>
+	
+      <target name="war" depends="compile">
+	  <mkdir dir="${war.dir}"/>
+	  <war destfile="build/war/selfprovbe.war" webxml="WebContent/WEB-INF/web.xml">
+	           <fileset dir="${lib.dir}" includes="**/*.jar"/>
+                   <fileset dir= "WebContent/" includes="**/*.*"/>    
+	  </war>
+      </target>
+
+      <ear destfile="selfprovbe.ear" appxml='WebContent/WEB-INF/web.xml'>
+           <fileset dir="${lib.dir}" includes="**/*.jar"/>
+      </ear>
+     	
+</project>
