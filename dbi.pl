@@ -18,6 +18,7 @@ my $driver = $ref->{'driver'};
 my $dsn = $ref->{'dsn'};
 my $username = $ref->{'username'};
 my $passwd = $ref->{'passwd'};
+#Uses DBI to connect to the database
 my $dbh = DBI->connect("dbi:$driver:$dsn", $username, $passwd, { AutoCommit => 1 });
 
 

@@ -1,6 +1,8 @@
 #!/bin/bash
 
-# This file will back up any given file by forst creating an initial backup if the given file is not present. Then it will backup only the differences as the filename + linux time.
+#This file will back up any given file by first creating an initial backup if 
+#the given file is not present. Then it will backup only the differences as 
+#the filename + linux time.
 
 #########################################
 # Use text file with the following format
@@ -10,19 +12,25 @@
 #backup_name=backup
 #
 ##########################################
-function assign_backup_detail()
-{
-while read line ;do export $line;done < input.props 
 
+#Input.props is a file that contains the source destination and name for backup
+function assign_backup_detail(){
+
+while read line ;do export $line;done < input.props 
 }
-function make_continous_backup()
-{
+
+
+function make_continous_backup(){
+     #Increments the filename + the current linux time
      incremental_file=$backup_name`date +%s`.tar     
      
+     #If backup file exists then it will make a backup of the update, which gets the info 
+     #of the previous backup from the .snar file.
      if [ -f $dest_dir/$backup_name.tar ]
      then
 	tar cvf $dest_dir/$incremental_file.tar ~/ -g $dest_dir/$backup_name.snar
         exit
+     #Else it will just make a new backup file with the name provided form the input.props
      else
 	tar cvf $dest_dir/$backup_name.tar ~/ -g $dest_dir/$backup_name.snar
 	exit
