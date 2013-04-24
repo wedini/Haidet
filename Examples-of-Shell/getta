@@ -1,0 +1,32 @@
+#!/bin/bash
+
+# This file takes the text parts of a url, separates the words only and prints out the top 10 words that are mostly used in the given url page.
+
+function input_check()
+{
+     
+     if [ $1 -ne 1 ]
+     then
+	echo 'Usage: getta <url>'
+        exit
+     fi
+}
+function process()
+{
+        url=$1
+	lynx -dump "$url" > /tmp/tmp.txt 
+	FILE="/tmp/tmp.txt"
+
+	cat $FILE | \
+	sed 's/\s/\n/g'| \ 
+	sed 's/[[:punct:]]//' | \
+	grep -E -v '^$' | \
+	sort | \
+	uniq -c | \
+	sort -gr | \
+	head | \
+	awk '{print $2 " : " $1}' 
+}
+
+input_check $#
+process $1

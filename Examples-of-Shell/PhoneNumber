@@ -1,0 +1,5 @@
+#!/bin/bash
+read string
+echo "$string" | sed -r 's/[^0-9]//g'
+
+

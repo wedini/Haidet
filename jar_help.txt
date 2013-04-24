@@ -1,0 +1,3 @@
+jar tvf //read a jar file
+
+

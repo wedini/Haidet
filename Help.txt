@@ -18,44 +18,6 @@ sed -i 's/Aubergine/Eggplant/' *.txt //replace words patch -p1 < recipes.patch /
 
  sed 's/\s/\n/g' CopiedFromLink |sed 's/[[:punct:]]//' | grep -E -v '^$' | sort | uniq -c | sort -gr | head | awk '{print $2 " : " $1}' > CFL_Sorted2.txt
 
-================================================================
-Repsitory
-
-Create a new repository on the command line
-
-touch README.md
-git init
-git add README.md
-git commit -m "first commit"
-git remote add origin https://github.com/wedini/hs_first_repository.git
-git push -u origin master
-
-Push an existing repository from the command line
-
-git remote add origin https://github.com/wedini/hs_first_repository.git
-git push -u origin master
-================================================================
-
-MySQL
-
-https://www.digitalocean.com/community/articles/a-basic-mysql-tutorial
-sudo apt-get install mysql-server
-mysql -u root -p
- CREATE DATABASE database name;
- DROP DATABASE database name;
- DESCRIBE potluck;
- ALTER TABLE potluck ADD email VARCHAR(40) AFTER name; 
- ALTER TABLE potluck ADD email VARCHAR(40);
-UPDATE `potluck` 
-SET 
-`confirmed` = 'Y' 
-WHERE `potluck`.`name` ='Sandy';
 
 
-
-
-TO CREATE A USER AND CHANGE PERMISSIONS
-1.Must log in as root user = mysql -u root -p
-2.Create a user called 'dbuser' = CREATE USER 'dbuser'@'localhost' IDENTIFIED BY 'abc123';
-3.Give it  privileges to haidet_1stDB = GRANT ALL PRIVILEGES ON haidet_1stDB.* TO 'dbuser'@'localhost';
    
