@@ -1,4 +1,0 @@
-driver=mysql
-dsn=database=haidet_1stDB
-username=dbuser
-passwd=abc123
