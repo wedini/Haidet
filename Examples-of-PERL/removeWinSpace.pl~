@@ -1,9 +1,0 @@
-#!/bin/bash
-#
-for i in `cat user.txt`
-do
-    echo "$i.luser"
-done
-
-
-
